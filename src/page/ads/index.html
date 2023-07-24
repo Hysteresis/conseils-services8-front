@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../../../dist/main.css">
     <script src="renderer.js" defer></script>
+    <script src="../../../dist/main.js" defer></script>
 </head>
+
 <body>
-<h1>Annonce </h1>
-<button id="home">Aller sur page D'accueil</button>
+    <h1>Annonce </h1>
 
-<h1>Données de l'API</h1>
-<ul id="apiDataList"></ul>
-<p>Titre annonce : <span id="title"></span> </p>
-<p>Description : <span id="description"></span> </p>
-<p>Diplome : <span id="degree"></span> </p>
-<!--TODO Marine inserer image  -->
-<img src="" alt="">
-
+    <!--! cards -->
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-4" id="apiDataList">
+            <!-- Announcements will be inserted here -->
+        </div>
+    </div>
+    <!--! fin cards -->
 </body>
+
 </html>
