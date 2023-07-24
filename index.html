@@ -36,25 +36,18 @@
     <div class="container-fluid home-header py-3" style='background-image: url("assets/img/header-chantier.webp") !important;  height: 100vh; width:auto ; background-repeat: no-repeat; '>
         <div class="container">
             <div class="row">
-                <h1 class="text-center fs-1 fs-lg-1 py-5">Notre travail est de vous en trouver un</h1>
+                <h1 class="text-center fs-1 fs-lg-1 py-5">Notre travail est de vous en trouver un !</h1>
                 <div class="col-8 mx-auto login-form">
                     <form method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">Adresse mail</label>
                             <input type="email" class="form-control" id="email" name="email" required placeholder="mon mail@mail.fr">
                         </div>
-                        <!-- <label for="username"><b>nom d'utilisateur</b></label>
-                        <input type="text" placeholder="nom d'utilisateur" id="username" name="username" required> -->
                         <div class="mb-3">   
                             <label for="password" class="form-label">Mot de passe</label>
                             <input type="password" id="password" class="form-control" id="password" name="password" required aria-labelledby="passwordHelpBlock">
-                        </div>
-                        <!-- <label for="password"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" id="password" name="password" required> -->
-                        
+                        </div>                        
                         <button id="submitBtn" type="submit" type="button" class="btn btn-primary">Se connecter</button>
-                        <!-- <button id="submitBtn" type="submit">Login</button> -->
-
                     </form>
                 </div>
             </div>
@@ -82,6 +75,7 @@
         </div>
     </form> -->
     <script>
+
         const { ipcRenderer } = require('electron');
         let form = document.querySelector('form');
 
@@ -89,7 +83,6 @@
             e.preventDefault()
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value
-            console.log('Avant le fetch')
             fetch("http://localhost:8000/auth", {
                 method: "POST",
                 headers: {
@@ -101,14 +94,11 @@
                 body: JSON.stringify({ "email": email, "password": password })
             })
                 .then((response) => {
-                    console.log(response)
                     return response.json();
                 })
                 .then((data) => {
-                    console.log(data)
                     localStorage.setItem('token', data.token);
                     ipcRenderer.send('token', data.token);
-                    // ipcRenderer.send('token', data.token);
                     ipcRenderer.send('getAd', data.token);
                 })
         })
