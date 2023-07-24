@@ -4,8 +4,8 @@ let winArray = [];
 
 function createMainWindow() {
     winArray['index'] = new BrowserWindow({
-        width: 1200,
-        height: 900,
+        width: 1920,
+        height: 1080,
         icon: path.join(__dirname, 'assets/img/kaamelott.jpg'),
         webPreferences: {
             nodeIntegration: true,
@@ -19,9 +19,13 @@ function createMainWindow() {
 }
 
 function createAdsWindow(){
+    if (winArray['ads']) {
+        // Si la fenêtre singleAd existe déjà, on la ferme avant d'en créer une nouvelle
+        winArray['ads'].close();
+    }
     winArray['ads'] = new BrowserWindow({
-        width: 1200,
-        height: 900,
+        width: 1920,
+        height: 1080,
         icon: path.join(__dirname, 'assets/img/kaamelott-logo.jpg'),
         webPreferences: {
             nodeIntegration: true,
@@ -34,6 +38,36 @@ function createAdsWindow(){
     winArray['ads'].webContents.openDevTools();
 }
 
+
+  
+  function createSingleAdWindow(announcementId) {
+    if (winArray['singleAd']) {
+        // Si la fenêtre singleAd existe déjà, on la ferme avant d'en créer une nouvelle
+        winArray['singleAd'].close();
+      }
+    winArray['singleAd'] = new BrowserWindow({
+      width: 1920,
+      height: 1080,
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+        enableRemoteModule: true,
+      }
+    });
+  
+    winArray['singleAd'].loadFile(path.join(__dirname, 'src/page/single-ad/index.html')).then(r => console.log(r));
+    winArray['singleAd'].webContents.openDevTools();
+    
+    // Envoi de l'ID de l'annonce à la fenêtre de l'annonce unique
+    winArray['singleAd'].webContents.on('did-finish-load', () => {
+    winArray['singleAd'].webContents.send('announcement-id', announcementId);
+    });
+  }
+
+  ipcMain.on('navigate-to-announcement', (event, announcementId) => {
+    createSingleAdWindow(announcementId);
+    // winArray['page-ads'].close();
+  });
 
 // Cette méthode sera appelée quand Electron aura fini
 // de s'initialiser et sera prêt à créer des fenêtres de navigation.
@@ -63,3 +97,8 @@ ipcMain.on('page-ads', (event, args) => {
 ipcMain.on('page-home', (event, args) => {
     createMainWindow();
 });
+
+// ipcMain.on('announcement-id', (event, announcementId) => {
+//     getSingleAd(announcementId);
+//   });
+

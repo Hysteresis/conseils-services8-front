@@ -1,56 +1,87 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Acceuil</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <script src="renderer.js" defer></script>
-    <script src = "dist/main.js" defer></script>
+    <script src="dist/main.js" defer></script>
     <link rel="stylesheet" href="dist/main.css">
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" >
+                <img src="assets/img/logo-blue-white.png" class="rounded-3" alt="" width="200" height="70">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="ad" href="#">Annonces</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <h1>Accueil</h1>
-      
-          <button id="ad">Annonces</button>
-          <button id="page_3">Aller sur page 3</button>
-  
-      <form method="post">
-          <div class="imgcontainer">
-          </div>
-  
-          <div class="container">
-              <label for="email"><b>nom d'utilisateur</b></label>
-              <input type="text" placeholder="nom d'utilisateur" id="email" name="email" required>
-  
-              <label for="password"><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" id="password" name="password" required>
-  
-              <button id="submitBtn" type="submit">Login</button>
-          </div>
-      </form>
-      <script>
+
+    <!--!debut  -->
+    <div class="container-fluid home-header py-3" style='background-image: url("assets/img/header-chantier.webp") !important;  height: 100vh; width:auto ; background-repeat: no-repeat; '>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center fs-1 fs-lg-1 py-5">Notre travail est de vous en trouver un</h1>
+                <div class="col-8 mx-auto login-form">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Adresse mail</label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="mon mail@mail.fr">
+                        </div>
+                        <!-- <label for="username"><b>nom d'utilisateur</b></label>
+                        <input type="text" placeholder="nom d'utilisateur" id="username" name="username" required> -->
+                        <div class="mb-3">   
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" id="password" class="form-control" id="password" name="password" required aria-labelledby="passwordHelpBlock">
+                        </div>
+                        <!-- <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" id="password" name="password" required> -->
+                        
+                        <button id="submitBtn" type="submit" type="button" class="btn btn-primary">Se connecter</button>
+                        <!-- <button id="submitBtn" type="submit">Login</button> -->
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--!fin  -->
+    <!-- <h1>Accueil</h1>
+
+
+    <button id="ad">Annonces</button>
+    <button id="page_3">Aller sur page 3</button>
+
+    <form method="post">
+        <div class="imgcontainer">
+        </div>
+
+        <div class="container">
+            <label for="email"><b>nom d'utilisateur</b></label>
+            <input type="text" placeholder="nom d'utilisateur" id="email" name="email" required>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="password" name="password" required>
+
+            <button id="submitBtn" type="submit">Login</button>
+        </div>
+    </form> -->
+    <script>
         const { ipcRenderer } = require('electron');
         let form = document.querySelector('form');
 
@@ -78,7 +109,7 @@
                     localStorage.setItem('token', data.token);
                     ipcRenderer.send('token', data.token);
                     // ipcRenderer.send('token', data.token);
-                    ipcRenderer.send('getAd', data.token); 
+                    ipcRenderer.send('getAd', data.token);
                 })
         })
 
@@ -86,7 +117,8 @@
 
 
 
-    </script> 
-    <script type="module" src="renderer.js"></script> 
+    </script>
+    <script type="module" src="renderer.js"></script>
 </body>
+
 </html>
