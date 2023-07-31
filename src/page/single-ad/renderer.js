@@ -1,13 +1,7 @@
 const { ipcRenderer } = require('electron');
 
 console.log('sing-ad/renderer')
-// ipcRenderer.on('announcement-id', (event, announcementId) => {
-//   getSingleAd(announcementId);
-// });
-// Fonction pour récupérer une seule annonce depuis l'API en fonction de son ID
 
-
-// Fonction pour afficher les détails de l'annonce unique
 function afficherAnnonce(annonce) {
   const apiDataSingleAd = document.getElementById('apiDataSingleAd');
   apiDataSingleAd.innerHTML = ''; // Effacer les données précédentes
@@ -64,8 +58,7 @@ function getSingleAd(announcementId) {
       console.error('Error:', error);
     });
 }
-// Le reste de votre code pour la récupération des annonces depuis l'API et l'affichage initial
-// ...
+
 ipcRenderer.on('announcement-id', (event, announcementId) => {
   getSingleAd(announcementId);
 });
