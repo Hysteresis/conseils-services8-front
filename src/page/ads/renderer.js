@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
 
 
-function afficherDonnees(data) {
+function showAds(data) {
     const apiDataList = document.getElementById('apiDataList');
     apiDataList.innerHTML = ''; 
 
@@ -61,7 +61,7 @@ function navigateToAnnouncement(announcementId) {
 }
 
 
-function getAd() {
+function getAds() {
     const token = localStorage.getItem('token');
     console.log("token: " + token)
     fetch( 'https://localhost:8000/api/ads',{
@@ -76,14 +76,13 @@ function getAd() {
 
     }).then((data) => {
         console.log(data)
-        afficherDonnees(data);
-        
+        showAds(data);
     })
       .catch((error) => {
         console.error('Error:', error);
       });
 }
 
-getAd();
+getAds();
 
   

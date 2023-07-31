@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Acceuil</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> -->
     <script src="renderer.js" defer></script>
     <script src="dist/main.js" defer></script>
     <link rel="stylesheet" href="dist/main.css">
@@ -54,26 +54,7 @@
         </div>
     </div>
     <!--!fin  -->
-    <!-- <h1>Accueil</h1>
 
-
-    <button id="ad">Annonces</button>
-    <button id="page_3">Aller sur page 3</button>
-
-    <form method="post">
-        <div class="imgcontainer">
-        </div>
-
-        <div class="container">
-            <label for="email"><b>nom d'utilisateur</b></label>
-            <input type="text" placeholder="nom d'utilisateur" id="email" name="email" required>
-
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" id="password" name="password" required>
-
-            <button id="submitBtn" type="submit">Login</button>
-        </div>
-    </form> -->
     <script>
 
         const { ipcRenderer } = require('electron');
@@ -97,9 +78,10 @@
                     return response.json();
                 })
                 .then((data) => {
+                    console.log(data.token)
                     localStorage.setItem('token', data.token);
                     ipcRenderer.send('token', data.token);
-                    ipcRenderer.send('getAd', data.token);
+                    ipcRenderer.send('getAds', data.token);
                 })
         })
 
